@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getUsers, addUser } from "../Services/users";
 
-export default function useSignupForm(validateSignup) {
+export default function useSignupForm(validateSignup, submitSignupForm) {
   const [inputName, setInputName] = useState("");
   const [signupErrors, setSignupErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,7 +23,8 @@ export default function useSignupForm(validateSignup) {
   useEffect(() => {
     if (Object.keys(signupErrors).length === 0 && isSubmitting) {
       console.log("Submitting");
-      addUser(inputName);
+
+      submitSignupForm(inputName);
     }
   }, [signupErrors]);
 

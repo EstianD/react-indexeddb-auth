@@ -19,13 +19,18 @@ async function validateSignup(username) {
   if (Object.keys(errors).length === 0) {
     // Get users
     const users = await getUsers();
-    // Filter users for specified user
-    let user = users.filter((user) => {
-      return user.username === username;
-    });
-    // Check if user exist
-    if (user.length) {
-      errors.name = "Username allready exists!";
+    console.log("users: ", users);
+
+    //  Check if users exist
+    if (users.length !== 0) {
+      let user = users.filter((user) => {
+        // Filter users for specified user
+        return user.username === username;
+      });
+      // Check if user exist
+      if (user.length) {
+        errors.name = "Username allready exists!";
+      }
     }
   }
 
